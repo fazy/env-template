@@ -1,9 +1,10 @@
 package main
 
 import (
+    "bytes"
     "fmt"
+    "io/ioutil"
     "os"
-    "strings"
     "text/template"
 )
 
@@ -18,23 +19,24 @@ func init() {
 }
 
 func main() {
-    parsedTemplate, err := template.ParseFiles(templateFile)
-    if err != nil { exitError(err) }
-
-    env := getEnv()
-    err = parsedTemplate.Execute(os.Stdout, &env)
-    if err != nil { exitError(err) }
-}
-
-func getEnv() map[string]string {
-    env := make(map[string]string)
-
-    for _, i := range os.Environ() {
-        parts := strings.Split(i, "=")
-        env[parts[0]] = parts[1]
+    getEnv := func(key string) (string) {
+        value := os.Getenv(key)
+        return value
     }
 
-    return env
+    funcs := template.FuncMap{ "env": getEnv }
+
+    templateContent, err := ioutil.ReadFile(templateFile)
+    if err != nil { exitError(err) }
+
+    parsedTemplate, err := template.New("test").Funcs(funcs).Parse(string(templateContent))
+    if err != nil { exitError(err) }
+
+    var output bytes.Buffer
+    err = parsedTemplate.Execute(&output, nil)
+    if err != nil { exitError(err) }
+
+    fmt.Print(output.String())
 }
 
 func exitError(err error) {

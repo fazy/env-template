@@ -28,5 +28,5 @@ Here's a simple exmaple:
 
 **test.yml**
 
-    Hello {{ .USER }}!
-    Your path is {{ .PATH }}
+    User: {{ env "USER" }}
+    Path: {{ env "PATH" }}

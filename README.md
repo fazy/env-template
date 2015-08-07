@@ -9,11 +9,14 @@ This can help with, for example, creating a configuration file for use within Do
 Install
 -------
 
-You can grab a release and place it anywhere, for example:
+For Linux x86_64, you can grab a release and place it anywhere, for example:
 
     sudo curl -L -o /usr/local/bin/env-template \
         https://github.com/fazy/env-template/releases/download/0.1/env-template-0.1-linux-x86_64 \
     && sudo chmod 0755 /usr/local/bin/env-template
+
+For other systems you can clone this repository, [download Go](https://golang.org/doc/install)
+and [build with one command](https://gobyexample.com/hello-world).
 
 Usage
 -----

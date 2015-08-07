@@ -6,6 +6,15 @@ variables, and outputs to stdout.
 
 This can help with, for example, creating a configuration file for use within Docker.
 
+Install
+-------
+
+You can grab a release and place it anywhere, for example:
+
+    sudo curl -L -o /usr/local/bin/env-template \
+        https://github.com/fazy/env-template/releases/download/0.1/env-template-0.1-linux-x86_64 \
+    && sudo chmod 0755 /usr/local/bin/env-template
+
 Usage
 -----
 
